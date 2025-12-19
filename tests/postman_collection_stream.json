@@ -1,0 +1,175 @@
+{
+  "info": {
+    "name": "Tammi Medical Agent - Stream",
+    "description": "Collection of streaming test cases for medical agent nodes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/management/health",
+          "host": ["{{base_url}}"],
+          "path": ["management", "health"]
+        }
+      }
+    },
+    {
+      "name": "1. Health Advice Stream - Ho đau họng",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-health-stream-001\",\n  \"request_id\": \"test-req-health-stream-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-456\",\n    \"family_id\": \"test-family-789\",\n    \"name\": \"Trần Thị B\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-002\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:05:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tôi bị ho và đau họng 3 ngày nay, có nên đi khám không?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"health_advice\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat", "stream"]
+        }
+      }
+    },
+    {
+      "name": "2. Diet Recommendation Stream - Huyết áp cao",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-diet-stream-001\",\n  \"request_id\": \"test-req-diet-stream-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-111\",\n    \"family_id\": \"test-family-222\",\n    \"name\": \"Phạm Thị D\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-004\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:15:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Chế độ ăn cho người huyết áp cao nên như thế nào?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"diet_recommendation\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat", "stream"]
+        }
+      }
+    },
+    {
+      "name": "3. Exercise Recommendation Stream - Đau lưng",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-exercise-stream-001\",\n  \"request_id\": \"test-req-exercise-stream-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-555\",\n    \"family_id\": \"test-family-666\",\n    \"name\": \"Đặng Thị F\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-006\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:25:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tôi bị đau lưng, nên tập gì để cải thiện?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"exercise_recommendation\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat", "stream"]
+        }
+      }
+    },
+    {
+      "name": "4. Auto Routing Stream - Giảm cân tập gì (Empty sub_intent)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-auto-stream-001\",\n  \"request_id\": \"test-req-auto-stream-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-161\",\n    \"family_id\": \"test-family-171\",\n    \"name\": \"Mai Văn L\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-011\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:50:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Muốn giảm cân thì nên tập gì?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat", "stream"]
+        }
+      }
+    },
+    {
+      "name": "5. Book Appointment Stream - Đặt lịch (Pending)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-booking-stream-001\",\n  \"request_id\": \"test-req-booking-stream-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-888\",\n    \"family_id\": \"test-family-999\",\n    \"name\": \"Cao Văn M\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-012\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:55:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Đặt lịch khám tim mạch tại Medlatec\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"book_appointment\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat", "stream"]
+        }
+      }
+    },
+    {
+      "name": "6. Purchase Medicine Stream - Mua thuốc (Pending)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-medicine-stream-001\",\n  \"request_id\": \"test-req-medicine-stream-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-999\",\n    \"family_id\": \"test-family-000\",\n    \"name\": \"Đinh Thị N\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-013\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T15:00:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Mua thuốc cảm cúm ở Long Châu\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"purchase_medicine\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat", "stream"]
+        }
+      }
+    },
+    {
+      "name": "7. Health Record Stream - Xem hồ sơ (Pending)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-record-stream-001\",\n  \"request_id\": \"test-req-record-stream-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-101\",\n    \"family_id\": \"test-family-202\",\n    \"name\": \"Trương Văn O\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-014\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T15:05:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Xem lịch sử khám bệnh của tôi\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"health_record\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": true\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat", "stream"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+# V1 Configuration for medical Agent
+# Production-ready configuration with optimized settings
+
+version: "v1"
+description: "Production version for medical agent"
+
+# Inherit from default configuration
+__extends: "default"
+
+# Override: Production LLM settings with Ollama local
+llm:
+  default_provider: "openai"
+  default_model:
+    name: "gpt-4.1"
+    provider: "openai"
+  default_backup_models:
+    - name: "qwen3-8b"
+      provider: "ollama"
+    - name: "qwen25-7b"
+      provider: "ollama"
+  default_temperature: 0.7
+  default_max_tokens: 512
+  request_timeout: 120  # 2 minutes timeout for LLM requests
+  max_retries: 2  # Retry failed requests up to 2 times
+  
+  services:
+    medical_agent:
+      temperature: 0.7
+      max_tokens: 512
+
+    metadata_extraction_node:
+      temperature: 0.1
+      max_tokens: 512
+      model:
+        name: "gpt-4o-mini"
+        provider: "openai"
+      backup_models:
+        - name: "qwen25-math-7b"
+          provider: "ollama"
+        - name: "gpt-4o-mini"
+          provider: "azure"
+
+    global_node_master: # booking appointment global node - master node config
+      temperature: 0.1
+      max_tokens: 4096
+      request_timeout: 5 
+      max_retries: 2
+      model:
+        name: "gemini-2.5-flash"
+        provider: "google"
+      backup_models:
+        - name: "gpt-4o-mini"
+          provider: "azure"
+
+    global_node_general_chat: # booking appointment global node - general chat config
+        temperature: 0.7
+        max_tokens: 256
+        request_timeout: 10
+        max_retries: 2
+        model:
+            name: "gemini-2.5-flash"
+            provider: "google"
+        backup_models:
+            - name: "gpt-4o-mini"
+              provider: "azure"
+
+    booking_node_extractor: # booking appointment booking node - extractor config
+        temperature: 0.1
+        max_tokens: 4096
+        request_timeout: 5
+        max_retries: 2
+        model:
+            name: "gpt-4o-mini"
+            provider: "azure"
+        backup_models:
+          - name: "gpt-4o-mini"
+            provider: "openrouter"
+          - name: "gemini-2.5-flash"
+            provider: "google"
+
+    management_node_intent_classifier: # booking appointment management node - intent classifier config
+      temperature: 0.1
+      max_tokens: 4096
+      request_timeout: 5
+      max_retries: 2
+      model:
+          name: "gemini-2.5-flash"
+          provider: "google"
+      backup_models:
+        - name: "gpt-4o-mini"
+          provider: "azure"
+
+    generate_tts_msg:
+      temperature: 0.7
+      max_tokens: 512
+      request_timeout: 10
+      max_retries: 2
+      model:
+        name: "gemini-2.5-flash"
+        provider: "google"
+      backup_models:
+          - name: "gpt-4o-mini"
+            provider: "azure"
+
+    generate_display_mgs:
+      temperature: 0.1
+      max_tokens: 512
+      request_timeout: 5
+      max_retries: 2
+      model:
+        name: "gpt-4o-mini"
+        provider: "azure"
+      backup_models:
+        - name: "gpt-4o-mini"
+          provider: "openrouter"
+        - name: "gemini-2.5-flash"
+          provider: "google"
+
+
+# Override: Production resource limits
+limits:
+  max_conversation_length: 100
+  max_tools_per_request: 10
+  timeout_seconds: 60
+
+# Override: All production features enabled
+features:
+  streaming: true
+  tool_calling: true
+  graph_caching: true
+  detailed_logging: true

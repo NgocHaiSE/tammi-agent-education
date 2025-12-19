@@ -1,0 +1,31 @@
+{
+  "session_id": "test-session-001",
+  "request_id": "test-req-001",
+  "user_context": {
+    "user_id": "test-user-123",
+    "family_id": "test-family-456",
+    "name": "Test User"
+  },
+  "client_context": {
+    "box_id": "box-001",
+    "type_box": "smart_speaker",
+    "device_model": "Tammi Gen2",
+    "os_type": "linux",
+    "os_version": "5.10",
+    "app_version": "1.0.0",
+    "location": {
+      "latitude": 21.0285,
+      "longitude": 105.8542
+    },
+    "timestamp": "2025-10-21T15:30:00Z"
+  },
+  "payload": {
+    "type": "text",
+    "content": "Tìm tài liệu học python cơ bản cho tôi",
+    "intent": "education",
+    "sub_intent": "search_material",
+    "metadata": {}
+  },
+  "history": [],
+  "stream": false
+}

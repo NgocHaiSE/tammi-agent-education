@@ -1,0 +1,168 @@
+{
+  "azure": {
+    "type": "azure",
+    "description": "Azure OpenAI Service with dedicated deployments",
+    "deployments": [
+      {
+        "name": "gpt-4o-mini",
+        "model": "gpt-4o-mini",
+        "api_key_env": "AZURE_OPENAI_API_KEY",
+        "endpoint_env": "AZURE_OPENAI_ENDPOINT",
+        "api_version_env": "AZURE_OPENAI_API_VERSION",
+        "deployment_name_env": "gpt-4o-mini"
+      },
+      {
+        "name": "gpt-4o",
+        "model": "gpt-4o",
+        "api_key_env": "AZURE_OPENAI_API_KEY",
+        "endpoint_env": "AZURE_OPENAI_ENDPOINT",
+        "api_version_env": "AZURE_OPENAI_API_VERSION",
+        "deployment_name_env": "gpt-4o"
+      }
+    ]
+  },
+  "openai": {
+    "type": "openai",
+    "description": "OpenAI API (GPT-4, GPT-3.5, etc.)",
+    "deployments": [
+      {
+        "name": "gpt-4o-mini",
+        "model": "gpt-4o-mini",
+        "api_key_env": "OPENAI_API_KEY",
+        "org_id_env": "OPENAI_ORG_ID",
+        "base_url_env": "OPENAI_BASE_URL"
+      },
+      {
+        "name": "gpt-4o",
+        "model": "gpt-4o",
+        "api_key_env": "OPENAI_API_KEY",
+        "org_id_env": "OPENAI_ORG_ID",
+        "base_url_env": "OPENAI_BASE_URL"
+      },
+      {
+        "name": "gpt-4.1",
+        "model": "gpt-4.1",
+        "api_key_env": "OPENAI_API_KEY",
+        "org_id_env": "OPENAI_ORG_ID",
+        "base_url_env": "OPENAI_BASE_URL"
+      },
+      {
+        "name": "gpt-3.5-turbo",
+        "model": "gpt-3.5-turbo",
+        "api_key_env": "OPENAI_API_KEY",
+        "org_id_env": "OPENAI_ORG_ID",
+        "base_url_env": "OPENAI_BASE_URL"
+      }
+    ]
+  },
+  "ollama": {
+    "type": "openai_compatible",
+    "description": "Ollama local LLM server (OpenAI API compatible)",
+    "deployments": [
+      {
+        "name": "qwen25-math-7b",
+        "model": "qwen2.5-math:7b",
+        "base_url_env": "OLLAMA_BASE_URL",
+        "api_key": "ollama"
+      },
+      {
+        "name": "qwen2-math-7b",
+        "model": "qwen2-math:7b",
+        "base_url_env": "OLLAMA_BASE_URL",
+        "api_key": "ollama"
+      },
+      {
+        "name": "qwen3-8b",
+        "model": "qwen3:8b",
+        "base_url_env": "OLLAMA_BASE_URL",
+        "api_key": "ollama"
+      },
+      {
+        "name": "llama3-8b",
+        "model": "llama3:8b",
+        "base_url_env": "OLLAMA_BASE_URL",
+        "api_key": "ollama"
+      },
+      {
+        "name": "llama3",
+        "model": "llama3",
+        "base_url_env": "OLLAMA_BASE_URL",
+        "api_key": "ollama"
+      },
+      {
+        "name": "mistral",
+        "model": "mistral",
+        "base_url_env": "OLLAMA_BASE_URL",
+        "api_key": "ollama"
+      },
+      {
+        "name": "gptoss-20b",
+        "model": "gpt-oss:20b",
+        "base_url_env": "OLLAMA_BASE_URL",
+        "api_key": "ollama"
+      }
+    ]
+  },
+  "openrouter": {
+    "type": "openai_compatible",
+    "description": "OpenRouter multi-provider API (OpenAI API compatible)",
+    "deployments": [
+      {
+        "name": "gpt-4o-mini",
+        "model": "openai/gpt-4o-mini",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url_env": "OPENROUTER_BASE_URL"
+      },
+      {
+        "name": "claude-3-5-sonnet",
+        "model": "anthropic/claude-3.5-sonnet",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url_env": "OPENROUTER_BASE_URL"
+      },
+      {
+        "name": "gemini-pro",
+        "model": "google/gemini-pro-1.5",
+        "api_key_env": "OPENROUTER_API_KEY",
+        "base_url_env": "OPENROUTER_BASE_URL"
+      }
+    ]
+  },
+  "google": {
+    "type": "google",
+    "description": "Google Gemini AI models",
+    "deployments": [
+      {
+        "name": "gemini-2.5-flash-lite",
+        "model": "gemini-2.0-flash-exp",
+        "api_key_env": "GOOGLE_API_KEY"
+      },
+      {
+        "name": "gemma-3-27b",
+        "model": "gemma-3-27b",
+        "api_key_env": "GOOGLE_API_KEY"
+      },
+      {
+        "name": "gemini-1.5-pro",
+        "model": "gemini-1.5-pro-latest",
+        "api_key_env": "GOOGLE_API_KEY"
+      },
+      {
+        "name": "gemini-1.5-flash",
+        "model": "gemini-1.5-flash-latest",
+        "api_key_env": "GOOGLE_API_KEY"
+      }
+    ]
+  },
+  "custom": {
+    "type": "openai_compatible",
+    "description": "Custom OpenAI-compatible endpoint (vLLM, LiteLLM, etc.)",
+    "deployments": [
+      {
+        "name": "custom-model",
+        "model": "custom-model",
+        "api_key_env": "CUSTOM_OPENAI_API_KEY",
+        "base_url_env": "CUSTOM_OPENAI_BASE_URL"
+      }
+    ]
+  }
+}

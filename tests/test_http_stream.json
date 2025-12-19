@@ -1,0 +1,31 @@
+{
+  "session_id": "test-stream-001",
+  "request_id": "test-req-002",
+  "user_context": {
+    "user_id": "test-user-456",
+    "family_id": "test-family-789",
+    "name": "Stream Tester"
+  },
+  "client_context": {
+    "box_id": "box-002",
+    "type_box": "smart_speaker",
+    "device_model": "Tammi Gen2",
+    "os_type": "linux",
+    "os_version": "5.10",
+    "app_version": "1.0.0",
+    "location": {
+      "latitude": 21.0285,
+      "longitude": 105.8542
+    },
+    "timestamp": "2025-10-21T15:35:00Z"
+  },
+  "payload": {
+    "type": "text",
+    "content": "Tạo bài tập trắc nghiệm tiếng anh lớp 10",
+    "intent": "education",
+    "sub_intent": "create_exercise",
+    "metadata": {}
+  },
+  "history": [],
+  "stream": true
+}

@@ -1,0 +1,175 @@
+{
+  "info": {
+    "name": "Tammi Medical Agent - Non-Stream",
+    "description": "Collection of non-streaming test cases for medical agent nodes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/management/health",
+          "host": ["{{base_url}}"],
+          "path": ["management", "health"]
+        }
+      }
+    },
+    {
+      "name": "1. Health Advice - Đau đầu sốt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-health-001\",\n  \"request_id\": \"test-req-health-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-123\",\n    \"family_id\": \"test-family-456\",\n    \"name\": \"Nguyễn Văn A\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-001\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:00:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tôi bị đau đầu và sốt nhẹ, nên làm gì?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"health_advice\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat"]
+        }
+      }
+    },
+    {
+      "name": "2. Diet Recommendation - Tiểu đường",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-diet-001\",\n  \"request_id\": \"test-req-diet-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-789\",\n    \"family_id\": \"test-family-101\",\n    \"name\": \"Lê Văn C\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-003\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:10:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tôi bị tiểu đường type 2, nên ăn gì để kiểm soát đường huyết?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"diet_recommendation\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat"]
+        }
+      }
+    },
+    {
+      "name": "3. Exercise Recommendation - Giảm cân",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-exercise-001\",\n  \"request_id\": \"test-req-exercise-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-333\",\n    \"family_id\": \"test-family-444\",\n    \"name\": \"Hoàng Văn E\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-005\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:20:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tôi muốn giảm cân 5kg, nên tập luyện như thế nào?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"exercise_recommendation\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat"]
+        }
+      }
+    },
+    {
+      "name": "4. Auto Routing - Tiểu đường ăn gì (Empty sub_intent)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-auto-001\",\n  \"request_id\": \"test-req-auto-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-141\",\n    \"family_id\": \"test-family-151\",\n    \"name\": \"Lý Thị K\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-010\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:45:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tôi bị tiểu đường nên ăn gì?\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat"]
+        }
+      }
+    },
+    {
+      "name": "5. Book Appointment - Đặt lịch Medlatec (Pending)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-booking-001\",\n  \"request_id\": \"test-req-booking-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-777\",\n    \"family_id\": \"test-family-888\",\n    \"name\": \"Vũ Văn G\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-007\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:30:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Đặt lịch khám tổng quát tại Medlatec cho tuần sau\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"book_appointment\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat"]
+        }
+      }
+    },
+    {
+      "name": "6. Purchase Medicine - Mua thuốc Long Châu (Pending)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-medicine-001\",\n  \"request_id\": \"test-req-medicine-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-999\",\n    \"family_id\": \"test-family-000\",\n    \"name\": \"Bùi Thị H\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-008\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:35:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Mua thuốc Paracetamol 500mg ở Long Châu giao tận nhà\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"purchase_medicine\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat"]
+        }
+      }
+    },
+    {
+      "name": "7. Health Record - Xem hồ sơ (Pending)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"session_id\": \"test-session-record-001\",\n  \"request_id\": \"test-req-record-001\",\n  \"user_context\": {\n    \"user_id\": \"test-user-121\",\n    \"family_id\": \"test-family-131\",\n    \"name\": \"Ngô Văn I\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-009\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"1.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-11-11T14:40:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Xem hồ sơ sức khỏe và kết quả xét nghiệm gần nhất của tôi\",\n    \"intent\": \"MEDICAL\",\n    \"sub_intent\": \"health_record\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/v1/chat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "chat"]
+        }
+      }
+    }
+  ]
+}

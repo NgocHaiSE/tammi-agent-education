@@ -1,0 +1,40 @@
+# Default Configuration for medical Agent
+# This file provides base configuration inherited by all versions
+
+version: "default"
+description: "Base configuration for medical agent with sensible defaults"
+
+# LLM Configuration
+llm:
+  default_provider: "azure"
+  default_model:
+    name: "gpt-4o-mini"
+    provider: "openai"
+  default_backup_models:
+    - name: "gpt-4o"
+      provider: "azure"
+    - name: "gpt-4o-mini"
+      provider: "openai"
+    - name: "gpt-4o"
+      provider: "openai"
+  default_temperature: 0.7
+  default_max_tokens: 512
+  
+  # medical agent LLM config
+  services:
+    medical_agent:
+      temperature: 0.7
+      max_tokens: 512
+      # model and backup_models inherited from defaults above
+
+# Resource Limits
+limits:
+  max_conversation_length: 50
+  max_tools_per_request: 5
+  timeout_seconds: 50
+
+# Feature Flags
+features:
+  streaming: true
+  tool_calling: true
+  graph_caching: true

@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package agents.v1;
+
+import "google/protobuf/struct.proto";
+
+message UserContext {
+  string user_id = 1;
+  string family_id = 2;
+  string name = 3;
+}
+
+message Location {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+message ClientContext {
+  string box_id = 1;
+  string type_box = 2;
+  string device_model = 3;
+  string os_type = 4;
+  string os_version = 5;
+  string app_version = 6;
+  Location location = 7;
+  string timestamp = 8; // ISO 8601 UTC
+}
+
+message Payload {
+  string type = 1; // text, image, audio
+  string content = 2; // simplified; for binary use URI/reference
+  string intent = 3;
+  string sub_intent = 4;
+  google.protobuf.Struct metadata = 5; // flexible JSON
+}
+
+message HistoryItem {
+  string role = 1; // user | assistant
+  string content = 2;
+  string intent = 3;
+  string sub_intent = 4;
+  string agent = 5;
+}
+
+// --- UIElement chỉ còn type và data ---
+message UIElement {
+  string type = 1; // card, list_item, image, weather_info, ...
+  google.protobuf.Struct data = 2; // flexible JSON/object
+}
+
+// --- Parameters định nghĩa rõ ràng nhưng có additional linh hoạt ---
+message Parameters {
+  string display_message = 1;
+  string tts_message = 2;
+  repeated UIElement ui_elements = 3;
+  repeated string suggestions = 4;
+  google.protobuf.Struct additional = 5; // linh hoạt, có thể chứa object JSON tùy ý
+}
+
+message DataPayload {
+  string intent = 1;
+  string sub_intent = 2;
+  Parameters parameters = 3; // định nghĩa rõ ràng
+}
+
+message Data {
+  DataPayload payload = 1;
+  google.protobuf.Struct metadata = 2; // flexible JSON/object
+}
+
+message AgentRequest {
+  string session_id = 1;
+  string request_id = 2;
+  UserContext user_context = 3;
+  ClientContext client_context = 4;
+  Payload payload = 5;
+  repeated HistoryItem history = 6;
+  bool stream = 7;
+}
+
+message Status {
+  int32 code = 1;
+  string message = 2;
+}
+
+message AgentResponse {
+  Status status = 1;
+  string session_id = 2;
+  string request_id = 3;
+  UserContext user_context = 4;
+  Data data = 5;
+}
+
+service AgentService {
+  rpc Chat(AgentRequest) returns (stream AgentResponse);
+}

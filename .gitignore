@@ -136,3 +136,4 @@ __pycache__/
 /examples/
 /deploy/
 /.env
+.github

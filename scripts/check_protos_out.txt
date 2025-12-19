@@ -1,0 +1,7 @@
+new_backend.Sub_Agents.medical_Agent: agents_pb2 AgentRequest=True AgentResponse=True; pb2_grpc Stub=True Servicer=True
+new_backend.Sub_Agents.QA_Agent: agents_pb2 AgentRequest=True AgentResponse=True; pb2_grpc Stub=True Servicer=True
+new_backend.Sub_Agents.Medical_Agent: agents_pb2 AgentRequest=True AgentResponse=True; pb2_grpc Stub=True Servicer=True
+new_backend.Sub_Agents.Knowledge_QA_Agent: agents_pb2 AgentRequest=True AgentResponse=True; pb2_grpc Stub=True Servicer=True
+new_backend.Sub_Agents.Education_Agent: agents_pb2 AgentRequest=True AgentResponse=True; pb2_grpc Stub=True Servicer=True
+
+ALL PROTOS IMPORTED OK

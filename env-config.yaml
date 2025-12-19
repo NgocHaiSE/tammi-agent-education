@@ -1,0 +1,822 @@
+# ===================================================================
+# Environment Configuration Schema - Tammi Education Agent
+# ===================================================================
+# This file defines all environment variables with their schema and defaults.
+# Secret values are stored separately in env-config.secret.yaml (not committed).
+#
+# Usage:
+#   python scripts/env_deploy.py sync-all
+#   python scripts/deploy.sh github-setup
+#   python scripts/deploy.sh k8s-deploy --namespace production
+# ===================================================================
+
+version: "1.0"
+project: "tammi-agent-chitchat"
+description: "Centralized environment configuration for Tammi Education Agent"
+
+variables:
+  # ===================================================================
+  # Python Runtime Configuration
+  # ===================================================================
+  
+  PYTHONPATH:
+    type: string
+    required: false
+    default: "/app"
+    description: "Python module search path"
+    
+  PYTHONDONTWRITEBYTECODE:
+    type: int
+    required: false
+    default: 1
+    description: "Prevent Python from writing .pyc files"
+    
+  PYTHONUNBUFFERED:
+    type: int
+    required: false
+    default: 1
+    description: "Force Python stdout and stderr to be unbuffered"
+
+  # ===================================================================
+  # Service Configuration
+  # ===================================================================
+  
+  SERVICE_NAME:
+    type: string
+    required: false
+    default: "Education_Agent"
+    description: "Name of the service"
+    
+  AGENT_NAME:
+    type: string
+    required: false
+    default: "chitchat"
+    description: "Agent identifier"
+    
+  AGENT_SERVICE_NAME:
+    type: string
+    required: false
+    default: "chitchat_agent"
+    description: "Agent service name"
+    
+  APPLICATION_NAME:
+    type: string
+    required: false
+    default: "Education Agent"
+    description: "Application display name"
+
+  # ===================================================================
+  # Server Configuration
+  # ===================================================================
+  
+  AGENT_HTTP_HOST:
+    type: string
+    required: false
+    default: "0.0.0.0"
+    description: "HTTP server host"
+    
+  AGENT_HTTP_PORT:
+    type: int
+    required: false
+    default: 8000
+    description: "HTTP server port"
+    
+  # ===================================================================
+  # Gateway gRPC Settings
+  # ===================================================================
+
+  AGENT_GRPC_HOST:
+    type: string
+    required: false
+    default: "0.0.0.0"
+    description: "gRPC server host (0.0.0.0 binds to all interfaces)"
+
+  AGENT_GRPC_PORT:
+    type: int
+    required: false
+    default: 50051
+    description: "Gateway gRPC server port"
+
+  # gRPC Advanced Configuration
+  GRPC_MAX_CONCURRENT_STREAMS:
+    type: int
+    required: false
+    default: 1000
+    description: "Maximum number of concurrent gRPC streams"
+
+  GRPC_KEEPALIVE_TIME_MS:
+    type: int
+    required: false
+    default: 30000
+    description: "gRPC keepalive time in milliseconds"
+
+  GRPC_KEEPALIVE_TIMEOUT_MS:
+    type: int
+    required: false
+    default: 5000
+    description: "gRPC keepalive timeout in milliseconds"
+
+  GRPC_MIN_PING_INTERVAL_MS:
+    type: int
+    required: false
+    default: 10000
+    description: "Minimum ping interval in milliseconds"
+
+  GRPC_MAX_PING_STRIKES:
+    type: int
+    required: false
+    default: 2
+    description: "Maximum number of ping strikes before closing connection"
+
+  GRPC_MAX_MESSAGE_SIZE_MB:
+    type: int
+    required: false
+    default: 4
+    description: "Maximum gRPC message size in MB"
+
+  # gRPC Client Configuration
+  GRPC_RETRY_COUNT:
+    type: int
+    required: false
+    default: 3
+    description: "Number of retry attempts for gRPC calls"
+
+  GRPC_DEFAULT_TIMEOUT:
+    type: float
+    required: false
+    default: 5.0
+    description: "Default timeout for gRPC calls in seconds"
+
+  GRPC_RETRY_BACKOFF_BASE_SECONDS:
+    type: float
+    required: false
+    default: 0.2
+    description: "Base backoff time for gRPC retries in seconds"
+
+  GRPC_RETRY_MAX_BACKOFF_SECONDS:
+    type: float
+    required: false
+    default: 5.0
+    description: "Maximum backoff time for gRPC retries in seconds"
+
+  GRPC_USE_TLS:
+    type: string
+    required: false
+    default: "0"
+    description: "Enable TLS for gRPC connections (1/true/yes to enable)"
+
+  GRPC_COMPRESSION:
+    type: string
+    required: false
+    default: "0"
+    description: "Enable gRPC compression (1/true/yes to enable)"
+
+  GRPC_KEEPALIVE_MS:
+    type: int
+    required: false
+    default: 30000
+    description: "gRPC keepalive time in milliseconds (alternative setting)"
+
+  # ===================================================================
+  # Gunicorn/Uvicorn Configuration
+  # ===================================================================
+  
+  GUNICORN_WORKERS:
+    type: int
+    required: false
+    default: 2
+    description: "Number of Gunicorn worker processes"
+    
+  GUNICORN_WORKER_CLASS:
+    type: string
+    required: false
+    default: "uvicorn.workers.UvicornWorker"
+    description: "Gunicorn worker class"
+    
+  GUNICORN_WORKER_CONNECTIONS:
+    type: int
+    required: false
+    default: 1000
+    description: "Maximum number of simultaneous clients per worker"
+    
+  GUNICORN_BACKLOG:
+    type: int
+    required: false
+    default: 2048
+    description: "Maximum number of pending connections"
+    
+  GUNICORN_MAX_REQUESTS:
+    type: int
+    required: false
+    default: 1000
+    description: "Maximum requests per worker before restart"
+    
+  GUNICORN_MAX_REQUESTS_JITTER:
+    type: int
+    required: false
+    default: 100
+    description: "Random jitter to add to max_requests"
+    
+  GUNICORN_TIMEOUT:
+    type: int
+    required: false
+    default: 60
+    description: "Worker timeout in seconds"
+    
+  GUNICORN_GRACEFUL_TIMEOUT:
+    type: int
+    required: false
+    default: 30
+    description: "Timeout for graceful workers restart in seconds"
+    
+  GUNICORN_KEEP_ALIVE:
+    type: int
+    required: false
+    default: 5
+    description: "Keep-alive timeout in seconds"
+    
+  GUNICORN_WORKER_TMP_DIR:
+    type: string
+    required: false
+    default: "/dev/shm"
+    description: "Directory to store temporary files for workers"
+    
+  GUNICORN_PRELOAD:
+    type: bool
+    required: false
+    default: false
+    description: "Preload application code before forking workers"
+    
+  GUNICORN_LOG_LEVEL:
+    type: string
+    required: false
+    default: "info"
+    
+  GUNICORN_ACCESS_LOG:
+    type: string
+    required: false
+    default: "-"
+    description: "Access log file path (- for stdout)"
+    
+  GUNICORN_ERROR_LOG:
+    type: string
+    required: false
+    default: "-"
+    description: "Error log file path (- for stderr)"
+    
+  UVICORN_LOOP:
+    type: string
+    required: false
+    default: "uvloop"
+    
+  UVICORN_HTTP:
+    type: string
+    required: false
+    default: "httptools"
+    
+  UVICORN_INTERFACE:
+    type: string
+    required: false
+    default: "asgi3"
+
+  # ===================================================================
+  # API Gateway Configuration
+  # ===================================================================
+  
+  API_GATEWAY_HTTP_URL:
+    type: string
+    required: false
+    default: "http://localhost:8001"
+    description: "API Gateway HTTP URL"
+    
+  API_GATEWAY_GRPC_URL:
+    type: string
+    required: false
+    default: "localhost:50051"
+    description: "API Gateway gRPC URL"
+    
+  API_GATEWAY_TIMEOUT:
+    type: float
+    required: false
+    default: 30.0
+    description: "API Gateway timeout in seconds"
+
+  # ===================================================================
+  # External Client Configuration
+  # ===================================================================
+  
+  EXTERNAL_CLIENT_TIMEOUT:
+    type: float
+    required: false
+    default: 10.0
+    description: "External client timeout in seconds"
+    
+  EXTERNAL_CLIENT_MAX_RETRIES:
+    type: int
+    required: false
+    default: 3
+    description: "Maximum number of retry attempts for external clients"
+    
+  CIRCUIT_BREAKER_THRESHOLD:
+    type: int
+    required: false
+    default: 5
+    description: "Circuit breaker failure threshold"
+    
+  CIRCUIT_BREAKER_TIMEOUT:
+    type: int
+    required: false
+    default: 60
+    description: "Circuit breaker timeout in seconds"
+    
+  SEARCH_TIMEOUT:
+    type: float
+    required: false
+    default: 30.0
+    description: "Search operation timeout in seconds"
+    
+  WEATHER_TIMEOUT:
+    type: float
+    required: false
+    default: 10.0
+    description: "Weather API timeout in seconds"
+
+  # ===================================================================
+  # Neo4j Graph Database Configuration
+  # ===================================================================
+  
+  NEO4J_ENABLED:
+    type: bool
+    required: false
+    default: false
+    description: "Enable Neo4j graph database integration for exercise generation"
+  
+  NEO4J_URI:
+    type: string
+    required: false
+    default: "neo4j://localhost:7687"
+    description: "Neo4j database URI"
+  
+  NEO4J_USER:
+    type: string
+    required: false
+    default: "neo4j"
+    description: "Neo4j username"
+  
+  NEO4J_PASSWORD:
+    type: string
+    required: false
+    default: ""
+    secret: true
+    description: "Neo4j password"
+  
+  NEO4J_DATABASE:
+    type: string
+    required: false
+    default: "education"
+    description: "Neo4j database name"
+  
+  NEO4J_TIMEOUT:
+    type: int
+    required: false
+    default: 30
+    description: "Neo4j operation timeout in seconds"
+  
+  NEO4J_MAX_CONNECTION_LIFETIME:
+    type: int
+    required: false
+    default: 3600
+    description: "Neo4j connection max lifetime in seconds"
+  
+  NEO4J_MAX_CONNECTION_POOL_SIZE:
+    type: int
+    required: false
+    default: 50
+    description: "Neo4j connection pool size"
+
+  # ===================================================================
+  # Vector Database Configuration
+  # ===================================================================
+  
+  # Qdrant Configuration
+  QDRANT_URL:
+    type: string
+    default: "http://localhost:6333"
+    description: "Qdrant server URL"
+    
+  QDRANT_API_KEY:
+    type: string
+    secret: true
+    required: false
+    default: ""
+    description: "Qdrant API key for authentication"
+    
+  QDRANT_COLLECTION_NAME:
+    type: string
+    default: "chitchat_agent_documents"
+    description: "Qdrant collection name for documents"
+    
+  QDRANT_TIMEOUT:
+    type: int
+    default: 30
+    description: "Qdrant operation timeout in seconds"
+    
+  QDRANT_PREFER_GRPC:
+    type: bool
+    default: false
+    description: "Prefer gRPC over HTTP for Qdrant"
+    
+  QDRANT_GRPC_PORT:
+    type: int
+    default: 6334
+    description: "Qdrant gRPC port"
+  
+  # Elasticsearch Configuration
+  ELASTICSEARCH_URL:
+    type: string
+    default: "http://localhost:9200"
+    description: "Elasticsearch server URL"
+    
+  ELASTICSEARCH_API_KEY:
+    type: string
+    secret: true
+    required: false
+    default: ""
+    description: "Elasticsearch API key"
+    
+  ELASTICSEARCH_USERNAME:
+    type: string
+    default: "elastic"
+    description: "Elasticsearch username"
+    
+  ELASTICSEARCH_PASSWORD:
+    type: string
+    secret: true
+    required: false
+    default: ""
+    description: "Elasticsearch password"
+    
+  ELASTICSEARCH_INDEX_NAME:
+    type: string
+    default: "chitchat_agent_documents"
+    description: "Elasticsearch index name"
+    
+  ELASTICSEARCH_TIMEOUT:
+    type: int
+    default: 30
+    description: "Elasticsearch timeout in seconds"
+    
+  ELASTICSEARCH_VERIFY_CERTS:
+    type: bool
+    default: false
+    description: "Verify SSL certificates for Elasticsearch"
+    
+  ELASTICSEARCH_CA_CERTS:
+    type: string
+    default: ""
+    description: "Path to CA certificates for Elasticsearch"
+
+    # Exercise Templates Index for RAG
+  ELASTICSEARCH_EXERCISE_INDEX:
+    type: string
+    default: "search-math"
+    description: "Elasticsearch index for exercise templates (RAG)"
+    
+  ELASTICSEARCH_EXERCISE_TOP_K:
+    type: int
+    default: 5
+    description: "Number of similar exercises to retrieve"
+    
+  ELASTICSEARCH_EXERCISE_SIMILARITY_THRESHOLD:
+    type: float
+    default: 0.7
+    description: "Minimum similarity score for exercise retrieval"
+  
+  # Vector DB General Settings
+  VECTOR_DB_PROVIDER:
+    type: string
+    default: "elasticsearch"
+    description: "Vector database provider (qdrant or elasticsearch)"
+    validation:
+      choices: ["qdrant", "elasticsearch"]
+    
+  VECTOR_EMBEDDING_DIM:
+    type: int
+    default: 1536
+    description: "Embedding vector dimension"
+    
+  VECTOR_SIMILARITY_METRIC:
+    type: string
+    default: "cosine"
+    description: "Similarity metric for vector search"
+    validation:
+      choices: ["cosine", "euclidean", "dot"]
+    
+  VECTOR_TOP_K:
+    type: int
+    default: 5
+    description: "Number of top results to return"
+    
+  VECTOR_SCORE_THRESHOLD:
+    type: float
+    default: 0.7
+    description: "Minimum similarity score threshold"
+  
+  # Intent Samples Collection
+  INTENT_SAMPLES_COLLECTION_NAME:
+    type: string
+    default: "intent_samples"
+    description: "Collection name for intent samples"
+
+  # ===================================================================
+  # Embedding Service Configuration
+  # ===================================================================
+  
+  ENDPOINT_TEXT3_EMBEDDING:
+    type: string
+    secret: true
+    required: false
+    default: ""
+    description: "Azure Text-3 embedding endpoint URL"
+    
+  API_KEY_TEXT3_EMBEDDING:
+    type: string
+    secret: true
+    required: false
+    default: ""
+    description: "Azure Text-3 embedding API key"
+    
+  EMBEDDING_MODEL:
+    type: string
+    default: "text-embedding-3-small"
+    description: "Embedding model name"
+    
+  EMBEDDING_DIMENSION:
+    type: int
+    default: 1024
+    description: "Embedding vector dimension (1536 for OpenAI, 1024 for BGE-M3)"
+    
+  EMBEDDING_PROVIDER:
+    type: string
+    default: "ollama"
+    description: "Embedding service provider (azure, openai, ollama)"
+
+  # ===================================================================
+  # LLM Configuration
+  # ===================================================================
+  
+  LLM_PROVIDER:
+    type: string
+    required: false
+    default: "google"
+    
+  LLM_MODEL:
+    type: string
+    required: false
+    default: "gemini-2.0-flash-exp"
+    description: "Default LLM model name"
+  
+  # OpenAI Configuration
+  OPENAI_API_KEY:
+    type: string
+    required: false
+    default: ""
+    secret: true
+    description: "OpenAI API key"
+    
+  OPENAI_ORG_ID:
+    type: string
+    required: false
+    default: ""
+    description: "OpenAI organization ID"
+    
+  OPENAI_BASE_URL:
+    type: string
+    required: false
+    default: "https://api.openai.com/v1/"
+    description: "OpenAI base URL (for custom endpoints)"
+    
+  OPENAI_API_VERSION:
+    type: string
+    required: false
+    default: "2024-02-15-preview"
+    description: "OpenAI API version"
+    
+  OPENAI_MODEL:
+    type: string
+    required: false
+    default: "gpt-4o-mini"
+    description: "OpenAI model name"
+  
+  # Azure OpenAI Configuration
+  AZURE_OPENAI_API_KEY:
+    type: string
+    required: false
+    default: ""
+    secret: true
+    description: "Azure OpenAI API key"
+    
+  AZURE_OPENAI_ENDPOINT:
+    type: string
+    required: false
+    default: "https://*.cognitiveservices.azure.com/"
+    description: "Azure OpenAI endpoint URL"
+    
+  AZURE_OPENAI_API_VERSION:
+    type: string
+    required: false
+    default: "2024-02-15-preview"
+    description: "Azure OpenAI API version"
+    
+  AZURE_OPENAI_DEPLOYMENT_GPT4O_MINI:
+    type: string
+    required: false
+    default: ""
+    description: "Azure OpenAI deployment name for GPT-4o-mini"
+    
+  AZURE_OPENAI_DEPLOYMENT_GPT4O:
+    type: string
+    required: false
+    default: ""
+    description: "Azure OpenAI deployment name for GPT-4o"
+  
+  # Ollama Configuration
+  OLLAMA_BASE_URL:
+    type: string
+    required: false
+    default: "http://localhost:11434/v1"
+    description: "Ollama server URL (OpenAI compatible API with /v1)"
+    
+  OLLAMA_MODEL:
+    type: string
+    required: false
+    default: "qwen2.5:7b"
+    description: "Ollama model name for LLM (qwen2.5:7b recommended)"
+  
+  OLLAMA_EMBEDDING_MODEL:
+    type: string
+    required: false
+    default: "bge-m3"
+    description: "Ollama embedding model name (bge-m3 recommended)"
+  
+  # OpenRouter Configuration
+  OPENROUTER_API_KEY:
+    type: string
+    required: false
+    default: ""
+    secret: true
+    description: "OpenRouter API key"
+    
+  OPENROUTER_BASE_URL:
+    type: string
+    required: false
+    default: "https://openrouter.ai/api/v1"
+    description: "OpenRouter base URL"
+  
+  # Google Gemini Configuration
+  GOOGLE_API_KEY:
+    type: string
+    required: false
+    default: ""
+    secret: true
+    description: "Google Gemini API key"
+  
+  GOOGLE_MODEL:
+    type: string
+    required: false
+    default: "gemini-2.0-flash-exp"
+    description: "Google Gemini model name"
+  
+  # Custom OpenAI-compatible endpoint
+  CUSTOM_OPENAI_BASE_URL:
+    type: string
+    required: false
+    default: ""
+    description: "Custom OpenAI-compatible endpoint URL"
+    
+  CUSTOM_OPENAI_API_KEY:
+    type: string
+    required: false
+    default: ""
+    secret: true
+    description: "Custom OpenAI-compatible API key"
+
+  # LLM Configuration Paths
+  LLM_CONFIG_PATH:
+    type: string
+    required: false
+    default: ""
+    description: "Path to LLM configuration file"
+    
+  VERSION_CONFIG_DIR:
+    type: string
+    required: false
+    default: ""
+    description: "Path to version configuration directory"
+    
+  DEFAULT_LLM_VERSION:
+    type: string
+    required: false
+    default: "v1"
+    description: "Default LLM version to use"
+
+  # LLM Retry/Backoff
+  AGENT_LLM_RETRY_COUNT:
+    type: int
+    required: false
+    default: 2
+    description: "Number of retry attempts for LLM calls"
+    
+  AGENT_LLM_BACKOFF_BASE:
+    type: float
+    required: false
+    default: 0.5
+    description: "Base backoff time for LLM retries in seconds"
+    
+  AGENT_REQUEST_TIMEOUT:
+    type: int
+    required: false
+    default: 15
+    description: "Agent request timeout in seconds"
+
+  # ===================================================================
+  # Graph Settings
+  # ===================================================================
+  
+  GRAPH_CACHE_ENABLED:
+    type: bool
+    required: false
+    default: true
+    description: "Enable graph caching"
+    
+  GRAPH_STREAM_MODE:
+    type: string
+    required: false
+    default: "messages"
+    description: "Graph streaming mode"
+
+  USE_LANGGRAPH_AGENT:
+    type: bool
+    required: false
+    default: true
+    description: "Use LangGraph agent"
+
+  # ===================================================================
+  # Environment & Logging
+  # ===================================================================
+  
+  ENVIRONMENT:
+    type: string
+    required: false
+    default: "development"
+    description: "Environment name (development, staging, production)"
+    
+  # ===================================================================
+  # Logging Configuration
+  # ===================================================================
+  # Logs use human-readable format for both console and file:
+  #   Format: HH:MM:SS LEVEL logger_name | message [key=value, ...]
+  #   Example: 09:27:31 INFO chitchat_HTTP | [REQUEST] /api/v1/chat [session_id=sess-123]
+  # 
+  # Output:
+  #   - Console: Colored output to stdout
+  #   - File: logs/chitchat_agent.log (same format, no colors)
+  # 
+  # Rotation: 
+  #   - Daily at midnight Vietnam time (creates YYYY-MM-DD.log backups)
+  #   - Size-based when file exceeds LOG_MAX_MB_PER_DAY (creates .1, .2, etc.)
+  # 
+  # Cleanup: Automatic deletion of logs older than LOG_RETENTION_DAYS
+  # ===================================================================
+  
+  LOG_LEVEL:
+    type: string
+    required: false
+    default: "INFO"
+    description: "Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)"
+    validation:
+      choices: ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+  
+  LOG_DIR:
+    type: string
+    required: false
+    default: "logs"
+    description: "Directory for log files (creates if doesn't exist)"
+  
+  LOG_MAX_MB_PER_DAY:
+    type: int
+    required: false
+    default: 100
+    description: "Maximum MB per day before size-based rotation (splits into .1, .2, etc.)"
+  
+  LOG_RETENTION_DAYS:
+    type: int
+    required: false
+    default: 90
+    description: "Number of days to keep old log files (automatic cleanup on rotation)"
+
+  ENABLE_VECTOR_DB_ROUTING:
+    type: bool
+    required: false
+    default: true
+    description: "Enable vector database routing"

@@ -1,0 +1,144 @@
+{
+  "session_id": "test-session-1-tier1-math",
+  "exercise_history": [
+    {
+      "timestamp": "2025-12-19T08:45:13.209534",
+      "request": {
+        "grade": 4,
+        "subject": "toán",
+        "topic": "cân-đong-đo",
+        "difficulty": "trung bình",
+        "exercise_type": "Tự luận",
+        "num_exercises": 3
+      },
+      "generated_exercises": [
+        {
+          "question": "Bạn có một bình 8 lít nước đầy, một bình 5 lít và một bình 3 lít đều rỗng. Chỉ dùng ba bình này, hãy chỉ cách đong được đúng 4 lít nước.",
+          "answer": "Bước 1: Đổ đầy bình 8 lít.\nBước 2: Rót nước từ bình 8 lít sang bình 5 lít cho đầy (bình 8 lít còn 3 lít, bình 5 lít đầy).\nBước 3: Rót nước từ bình 5 lít sang bình 3 lít cho đầy (bình 5 lít còn 2 lít, bình 3 lít đầy).\nBước 4: Đổ hết nước ở bình 3 lít đi (bình 3 lít rỗng).\nBước 5: Rót nước từ bình 5 lít sang bình 3 lít cho đầy (bình 5 lít còn 1 lít, bình 3 lít đủ 2 lít).\nBước 6: Đổ hết nước ở bình 3 lít đi (bình 3 lít rỗng).\nBước 7: Rót nước còn lại trong bình 5 lít (1 lít) vào bình 3 lít (bình 3 lít có 1 lít).\nBước 8: Đổ đầy lại bình 8 lít.\nBước 9: Rót nước từ bình 8 lít sang bình 5 lít cho đầy (bình 8 lít còn 6 lít, bình 5 lít đầy).\nBước 10: Rót nước từ bình 5 lít sang bình 3 lít cho đầy (bình 3 lít đang có 1 lít, chỉ cần rót thêm 2 lít là đầy, vậy bình 5 lít còn lại 3 lít).\nVậy ở bước này, bình 5 lít còn đúng 3 lít và bình 8 lít còn 6 lít. Nếu tiếp tục, ta có thể lấy được 4 lít bằng cách khác:\nCách dễ hơn: \n- Đổ đầy bình 8 lít, rót sang bình 3 lít (bình 3 lít đầy, bình 8 lít còn 5 lít).\n- Đổ bình 3 lít đi, rót tiếp 3 lít từ bình 8 lít sang bình 3 lít (bình 8 lít còn 2 lít, bình 3 lít đầy).\n- Đổ bình 3 lít đi, rót 2 lít còn lại từ bình 8 lít sang bình 3 lít (bình 8 lít rỗng, bình 3 lít còn 2 lít).\n- Đổ đầy lại bình 8 lít, rót sang bình 3 lít cho đầy (bình 3 lít đã có 2 lít, chỉ cần thêm 1 lít là đầy, bình 8 lít còn lại 7 lít).\n- Đổ bình 3 lít đi, bình 8 lít còn đúng 7 lít.\nCách trình bày trên là một trong các cách để đong được 4 lít nước.",
+          "difficulty": "Trung bình"
+        },
+        {
+          "question": "Có 9 cục kim loại nhìn giống hệt nhau, trong đó chỉ có 1 cục nặng hơn các cục còn lại. Bạn chỉ có một cái cân hai đĩa không có quả cân. Hỏi với ít nhất mấy lần cân, bạn có thể chắc chắn tìm được cục nặng nhất? Hãy trình bày cách làm.",
+          "answer": "Số lần cân ít nhất là 2 lần.\nCách làm:\n- Lần 1: Chia 9 cục thành 3 nhóm, mỗi nhóm 3 cục. Cân 2 nhóm với nhau. Nếu hai nhóm cân bằng thì cục nặng nằm ở nhóm chưa cân. Nếu lệch, nhóm nặng hơn có cục cần tìm.\n- Lần 2: Lấy 3 cục ở nhóm có cục nặng. Đem cân 2 cục bất kỳ trong 3 cục này. Nếu cân bằng thì cục còn lại là cục nặng nhất. Nếu lệch, cục nặng hơn là cục cần tìm.\nVậy tối thiểu cần 2 lần cân để tìm được cục nặng nhất.",
+          "difficulty": "Khó"
+        },
+        {
+          "question": "Bạn có một thùng chứa 12 lít sữa tươi, cần chia thành hai phần bằng nhau nhưng chỉ có một can 8 lít và một can 5 lít. Hãy trình bày cách lấy ra đúng 6 lít sữa chỉ với hai can này.",
+          "answer": "Bước 1: Đổ đầy can 8 lít từ thùng (thùng còn 4 lít).\nBước 2: Đổ sữa từ can 8 lít sang can 5 lít cho đầy (can 8 lít còn 3 lít, can 5 lít đầy).\nBước 3: Đổ hết can 5 lít đi (can 5 lít rỗng).\nBước 4: Đổ sữa còn lại trong can 8 lít (3 lít) sang can 5 lít (can 8 lít rỗng, can 5 lít còn 3 lít).\nBước 5: Đổ đầy lại can 8 lít từ thùng (thùng còn 4 lít - 8 lít đã lấy từ trước = hết thùng).\nBước 6: Đổ sữa từ can 8 lít sang can 5 lít cho đầy (can 5 lít đã có 3 lít nên chỉ cần thêm 2 lít là đầy, can 8 lít còn lại 6 lít).\nNhư vậy, lúc này trong can 8 lít còn đúng 6 lít sữa, ta đã lấy được 6 lít sữa ra khỏi thùng.",
+          "difficulty": "Trung bình"
+        }
+      ],
+      "metadata": {
+        "method": "rag",
+        "tier": 2,
+        "model": "gpt-4.1",
+        "retrieval_metadata": {
+          "found": 50,
+          "used": 5,
+          "query": "Bài tập toán lớp 4 về chủ đề cân-đong-đo dạng Tự luận",
+          "avg_score": 11.68427874,
+          "query_time_ms": 667.7424907684326
+        }
+      }
+    },
+    {
+      "timestamp": "2025-12-19T09:29:20.488877",
+      "request": {
+        "grade": 4,
+        "subject": "toán",
+        "topic": "cân-đong-đo",
+        "difficulty": "trung bình",
+        "exercise_type": "Tự luận",
+        "num_exercises": 3
+      },
+      "generated_exercises": [
+        {
+          "question": "Có ba thùng dầu với dung tích lần lượt là 10 lít, 7 lít và 3 lít. Ban đầu thùng 10 lít đầy dầu, hai thùng còn lại rỗng. Hãy chỉ cách chia dầu thành hai phần bằng nhau (mỗi phần 5 lít) chỉ bằng ba thùng này.",
+          "answer": "Bước 1: Đổ dầu từ thùng 10 lít sang thùng 7 lít, được: thùng 10 lít còn 3 lít, thùng 7 lít đầy 7 lít, thùng 3 lít vẫn rỗng. \nBước 2: Đổ dầu từ thùng 7 lít sang thùng 3 lít, được: thùng 10 lít còn 3 lít, thùng 7 lít còn 4 lít, thùng 3 lít đầy 3 lít.\nBước 3: Đổ dầu từ thùng 3 lít (đầy) đổ bỏ hoặc sang thùng khác để lấy lại thùng rỗng.\nBước 4: Đổ dầu từ thùng 7 lít (còn 4 lít) sang thùng 3 lít rỗng, được: thùng 10 lít còn 3 lít, thùng 7 lít còn 1 lít, thùng 3 lít đầy 3 lít.\nBước 5: Đổ dầu từ thùng 3 lít (đầy) đổ bỏ hoặc sang thùng khác để lấy lại thùng rỗng.\nBước 6: Đổ dầu từ thùng 7 lít (còn 1 lít) sang thùng 3 lít rỗng, được: thùng 10 lít còn 3 lít, thùng 7 lít rỗng, thùng 3 lít còn 1 lít.\nBước 7: Đổ dầu từ thùng 10 lít (3 lít) sang thùng 7 lít rỗng, được: thùng 10 lít rỗng, thùng 7 lít còn 3 lít, thùng 3 lít còn 1 lít.\nBước 8: Đổ dầu từ thùng 7 lít (3 lít) sang thùng 3 lít (còn 1 lít) cho đầy, được: thùng 7 lít còn 1 lít, thùng 3 lít đầy 3 lít.\nBước 9: Đổ dầu từ thùng 3 lít (đầy) đổ bỏ để lấy lại thùng rỗng.\nBước 10: Đổ dầu từ thùng 7 lít (1 lít) sang thùng 3 lít rỗng, được: thùng 7 lít rỗng, thùng 3 lít còn 1 lít.\nBước 11: Đổ dầu từ thùng 10 lít (rỗng) sang thùng 7 lít (rỗng) không có gì thay đổi.\nBước 12: Đổ dầu từ thùng 3 lít (1 lít) sang thùng 7 lít, được: thùng 7 lít còn 1 lít, thùng 3 lít rỗng.\nBước 13: Đổ dầu từ thùng 10 lít (rỗng) sang thùng 7 lít (1 lít) không có gì thay đổi.\nKết quả: Sau các bước rót, sẽ có hai thùng chứa mỗi thùng 5 lít (có thể tối ưu hóa bằng số bước ít hơn, song học sinh chỉ cần rót tuần tự để ra được kết quả: mỗi thùng 5 lít).",
+          "difficulty": "Trung bình"
+        },
+        {
+          "question": "Bạn có tám quả bóng nhìn giống hệt nhau, trong đó có một quả nhẹ hơn các quả còn lại. Chỉ sử dụng một cái cân hai đĩa, hãy trình bày cách tìm ra quả bóng nhẹ nhất bằng ít nhất số lần cân có thể.",
+          "answer": "Chia 8 quả bóng thành 3 nhóm: nhóm 1 (3 quả), nhóm 2 (3 quả), nhóm 3 (2 quả).\nLần 1: Cân nhóm 1 và nhóm 2 (mỗi bên 3 quả). Nếu hai bên cân bằng, quả nhẹ nằm trong nhóm 3 (2 quả) -> Cân tiếp hai quả đó, quả nhẹ hơn là quả cần tìm (tổng 2 lần cân). Nếu một bên nhẹ hơn, quả nhẹ nằm ở nhóm đó.\nLần 2: Lấy 3 quả của nhóm nghi ngờ, cân 2 quả bất kỳ. Nếu cân bằng, quả chưa cân là quả nhẹ. Nếu không cân bằng, quả nhẹ hơn là quả cần tìm.\nVậy chỉ cần 2 lần cân là tìm được quả bóng nhẹ nhất.",
+          "difficulty": "Trung bình"
+        },
+        {
+          "question": "Một người mẹ có một bình 9 lít nước, một bình 6 lít và một bình 4 lít đều rỗng. Làm thế nào để đong được đúng 3 lít nước chỉ bằng ba bình này?",
+          "answer": "Bước 1: Đổ nước đầy bình 6 lít từ bình 9 lít (bình 9 lít còn 3 lít, bình 6 lít đầy, bình 4 lít rỗng).\nBước 2: Đổ nước từ bình 6 lít sang bình 4 lít cho đầy (bình 6 lít còn 2 lít, bình 4 lít đầy, bình 9 lít còn 3 lít).\nBước 3: Đổ nước từ bình 4 lít (đầy) đi để lấy lại bình rỗng.\nBước 4: Đổ nước từ bình 6 lít (2 lít) sang bình 4 lít rỗng (bình 6 lít rỗng, bình 4 lít còn 2 lít).\nBước 5: Đổ nước đầy bình 6 lít từ bình 9 lít (bình 9 lít hết, bình 6 lít đầy, bình 4 lít còn 2 lít).\nBước 6: Đổ nước từ bình 6 lít sang bình 4 lít (còn 2 lít trống) cho đầy (bình 6 lít còn 4 lít, bình 4 lít đầy 4 lít). Lúc này bình 6 lít còn 4 lít. Đổ tiếp 1 lít từ bình 6 lít sang bình 4 lít để đầy bình này, bình 6 lít còn đúng 3 lít nước.\nVậy đã đong được đúng 3 lít nước bằng ba bình.",
+          "difficulty": "Khó"
+        }
+      ],
+      "metadata": {
+        "method": "rag",
+        "tier": 2,
+        "model": "gpt-4.1",
+        "retrieval_metadata": {
+          "found": 50,
+          "used": 5,
+          "query": "Bài tập toán lớp 4 về chủ đề cân-đong-đo dạng Tự luận",
+          "avg_score": 13.674228,
+          "query_time_ms": 732.778787612915
+        }
+      }
+    }
+  ],
+  "conversation_history": [
+    {
+      "role": "human",
+      "content": "tạo cho tôi 3 bài tập chủ đề bài toán cân-đong-đo",
+      "timestamp": "2025-12-19T08:44:41.873962",
+      "metadata": {
+        "request_type": "create_exercise"
+      }
+    },
+    {
+      "role": "ai",
+      "content": "Đây là 3 bài tập toán lớp 4 (Tự luận):\n\n\n1. Bạn có một bình 8 lít nước đầy, một bình 5 lít và một bình 3 lít đều rỗng. Chỉ dùng ba bình này, hãy chỉ cách đong được đúng 4 lít nước.\n\n2. Có 9 cục kim loại nhìn giống hệt nhau, trong đó chỉ có 1 cục nặng hơn các cục còn lại. Bạn chỉ có một cái cân hai đĩa không có quả cân. Hỏi với ít nhất mấy lần cân, bạn có thể chắc chắn tìm được cục nặng nhất? Hãy trình bày cách làm.\n\n3. Bạn có một thùng chứa 12 lít sữa tươi, cần chia thành hai phần bằng nhau nhưng chỉ có một can 8 lít và một can 5 lít. Hãy trình bày cách lấy ra đúng 6 lít sữa chỉ với hai can này.",
+      "timestamp": "2025-12-19T08:45:13.209568",
+      "metadata": {
+        "exercises_count": 3,
+        "generation_tier": 2,
+        "grade": 4,
+        "subject": "toán",
+        "topic": "cân-đong-đo"
+      }
+    },
+    {
+      "role": "human",
+      "content": "tạo cho tôi 3 bài tập chủ đề bài toán cân-đong-đo",
+      "timestamp": "2025-12-19T09:28:43.245806",
+      "metadata": {
+        "request_type": "create_exercise"
+      }
+    },
+    {
+      "role": "ai",
+      "content": "Đây là 3 bài tập toán lớp 4 (Tự luận):\n\n\n1. Có ba thùng dầu với dung tích lần lượt là 10 lít, 7 lít và 3 lít. Ban đầu thùng 10 lít đầy dầu, hai thùng còn lại rỗng. Hãy chỉ cách chia dầu thành hai phần bằng nhau (mỗi phần 5 lít) chỉ bằng ba thùng này.\n\n2. Bạn có tám quả bóng nhìn giống hệt nhau, trong đó có một quả nhẹ hơn các quả còn lại. Chỉ sử dụng một cái cân hai đĩa, hãy trình bày cách tìm ra quả bóng nhẹ nhất bằng ít nhất số lần cân có thể.\n\n3. Một người mẹ có một bình 9 lít nước, một bình 6 lít và một bình 4 lít đều rỗng. Làm thế nào để đong được đúng 3 lít nước chỉ bằng ba bình này?\n\n\nTrên đây là 3 bài tập toán lớp 4 chủ đề 'cân-đong-đo' với mức độ trung bình.\nBạn có muốn tôi tăng/giảm độ khó hay giải các bài tập này không?",
+      "timestamp": "2025-12-19T09:29:20.488920",
+      "metadata": {
+        "exercises_count": 3,
+        "generation_tier": 2,
+        "grade": 4,
+        "subject": "toán",
+        "topic": "cân-đong-đo"
+      }
+    }
+  ],
+  "user_preferences": {
+    "preferred_subjects": [
+      "toán"
+    ],
+    "preferred_grades": [
+      4
+    ],
+    "preferred_difficulty": "trung bình",
+    "preferred_exercise_type": "Tự luận"
+  },
+  "last_context": {
+    "grade": 4,
+    "subject": "toán",
+    "topic": "cân-đong-đo",
+    "exercise_type": "Tự luận",
+    "difficulty": "trung bình"
+  }
+}

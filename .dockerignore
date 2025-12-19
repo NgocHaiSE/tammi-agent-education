@@ -1,0 +1,97 @@
+# ============================================================================
+# Docker ignore file for Tammi Agent Education
+# Exclude files not needed in production Docker image
+# ============================================================================
+
+# Git and version control
+.git
+.gitignore
+.gitattributes
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+backend_venv/
+frontend_venv/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment and secrets
+backup/.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets/
+
+# Testing files - not needed in production
+tests/
+requirements-test.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+pytest.ini
+
+# Documentation - not needed in production
+docs/
+*.md
+!README.md
+MIGRATION_GUIDE.md
+REFACTORING_SUMMARY.md
+
+# Development scripts - not needed in production
+scripts/
+AITeam/
+old_code/
+examples/
+
+# CI/CD files
+.github/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+logs/
+tmp/
+
+# Proto generated files (should be generated at build time if needed)
+new_backend/proto_gen/
+
+# Other build artifacts
+.wheelhouse
+*.whl
+

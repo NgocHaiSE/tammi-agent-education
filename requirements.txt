@@ -1,0 +1,32 @@
+grpcio>=1.75.1
+grpcio-tools>=1.75.1
+grpcio-reflection>=1.75.1
+protobuf>=6.31.0,<7.0.0
+openai>=1.8.2
+fastapi>=0.95.2
+uvicorn[standard]>=0.22.0
+langgraph>=0.2.0
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-openai>=0.2.0
+langchain-google-genai>=2.0.0
+httpx>=0.27.0
+pybreaker>=1.0.1
+tornado>=6.0.0
+tenacity>=8.2.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+PyYAML>=6.0.0
+python-dotenv>=1.0.0
+qdrant-client>=1.7.0
+elasticsearch>=8.0.0
+
+# Neo4j integration
+neo4j>=5.13.0
+numpy>=1.24.0
+
+# Hybrid keyword extraction (KeyBERT + YAKE + NER)
+keybert>=0.8.0
+sentence-transformers>=2.2.0
+yake>=0.4.8
+underthesea>=6.0.0  # Vietnamese NLP (NER, POS tagging)

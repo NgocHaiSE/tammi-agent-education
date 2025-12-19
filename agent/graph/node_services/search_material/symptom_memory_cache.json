@@ -1,0 +1,9 @@
+{
+  "session_id": "session_abcxyz",
+  "history": [
+    {
+      "role": "human",
+      "content": "Xin chào"
+    }
+  ]
+}
