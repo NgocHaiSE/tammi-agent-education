@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "f93ed0dd-3b81-4a63-a5fc-4ff0bbfb6d61",
+		"name": "Tammi Create Exercise - Subgraph Tests",
+		"description": "Test cases for Create Exercise Subgraph với dynamic routing (Tier 1 Rule-based vs Tier 3 LLM Fallback)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50371103",
+		"_collection_link": "https://ngochaise-7342881.postman.co/workspace/Nguy%E1%BB%85n-Ng%E1%BB%8Dc-H%E1%BA%A3i's-Workspace~9e58fccb-bd00-4db9-84b1-c2cfb8b365fe/collection/50371103-f93ed0dd-3b81-4a63-a5fc-4ff0bbfb6d61?action=share&source=collection_link&creator=50371103"
+	},
+	"item": [
+		{
+			"name": "0. Health Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Service is healthy', function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/management/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"management",
+						"health"
+					]
+				},
+				"description": "Kiểm tra service đang chạy"
+			},
+			"response": []
+		},
+		{
+			"name": "Tier 2 - Toán lớp 4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Response has exercises', function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('data');",
+							"});",
+							"",
+							"pm.test('Tier 1 Rule-based generation', function () {",
+							"    const jsonData = pm.response.json();",
+							"    // Check if fast response (< 2s indicates rule-based)",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"session_id\": \"{{session_id}}-tier1-math\",\n  \"request_id\": \"req-tier1-{{$timestamp}}\",\n  \"user_context\": {\n    \"user_id\": \"user-test-001\",\n    \"family_id\": \"family-test-001\",\n    \"name\": \"Học sinh A\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-tier1-test\",\n    \"type_box\": \"tablet\",\n    \"device_model\": \"Tammi Tablet\",\n    \"os_type\": \"android\",\n    \"os_version\": \"12\",\n    \"app_version\": \"2.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-12-09T10:00:00Z\" \n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"tạo cho tôi 3 câu hỏi toán lớp 3 mức độ khó\",\n    // \"content\": \"Giúp tôi giải bài toán này Có ba thùng dầu với dung tích lần lượt là 10 lít, 7 lít và 3 lít. Ban đầu thùng 10 lít đầy dầu, hai thùng còn lại rỗng. Hãy chỉ cách chia dầu thành hai phần bằng nhau (mỗi phần 5 lít) chỉ bằng ba thùng này.\",\n    \"intent\": \"EDUCATION\",\n    \"sub_intent\": \"create_exercise\"\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chat"
+					]
+				},
+				"description": "Test Tier 1 - Simple case (Toán lớp 6) sẽ dùng Rule-based generation\n\nExpected:\n- ValidationNode: validated=True, grade=6, subject=Toán\n- ScopeClassifierNode: tier=1, method=rule_based\n- RuleBasedNode: Generate từ template\n- Response time: < 2s"
+			},
+			"response": []
+		},
+		{
+			"name": "Giải bài tập",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Response has exercises', function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('data');",
+							"});",
+							"",
+							"pm.test('Tier 1 Rule-based generation', function () {",
+							"    const jsonData = pm.response.json();",
+							"    // Check if fast response (< 2s indicates rule-based)",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"session_id\": \"{{session_id}}-tier1-math\",\n  \"request_id\": \"req-tier1-{{$timestamp}}\",\n  \"user_context\": {\n    \"user_id\": \"user-test-001\",\n    \"family_id\": \"family-test-001\",\n    \"name\": \"Học sinh A\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-tier1-test\",\n    \"type_box\": \"tablet\",\n    \"device_model\": \"Tammi Tablet\",\n    \"os_type\": \"android\",\n    \"os_version\": \"12\",\n    \"app_version\": \"2.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-12-09T10:00:00Z\" \n  },\n  \"payload\": {\n    \"type\": \"text\",\n    // \"content\": \"tạo cho tôi 3 câu hỏi toán lớp 3 mức độ khó\",\n    \"content\": \"Giúp tôi giải bài toán này Có ba thùng dầu với dung tích lần lượt là 10 lít, 7 lít và 3 lít. Ban đầu thùng 10 lít đầy dầu, hai thùng còn lại rỗng. Hãy chỉ cách chia dầu thành hai phần bằng nhau (mỗi phần 5 lít) chỉ bằng ba thùng này.\",\n    \"intent\": \"EDUCATION\",\n    \"sub_intent\": \"correct_exercise\"\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chat"
+					]
+				},
+				"description": "Test Tier 1 - Simple case (Toán lớp 6) sẽ dùng Rule-based generation\n\nExpected:\n- ValidationNode: validated=True, grade=6, subject=Toán\n- ScopeClassifierNode: tier=1, method=rule_based\n- RuleBasedNode: Generate từ template\n- Response time: < 2s"
+			},
+			"response": []
+		},
+		{
+			"name": "Tier 3 - Vật lý lớp 12 (LLM Fallback)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Tier 3 LLM Fallback', function () {",
+							"    // LLM call takes longer",
+							"    pm.expect(pm.response.responseTime).to.be.above(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"session_id\": \"{{session_id}}-tier3-physics\",\n  \"request_id\": \"req-tier3-{{$timestamp}}\",\n  \"user_context\": {\n    \"user_id\": \"user-test-003\",\n    \"family_id\": \"family-test-002\",\n    \"name\": \"Học sinh C\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-tier3-test\",\n    \"type_box\": \"tablet\",\n    \"device_model\": \"Tammi Tablet\",\n    \"os_type\": \"ios\",\n    \"os_version\": \"15\",\n    \"app_version\": \"2.0.0\",\n    \"location\": {\n      \"latitude\": 10.8231,\n      \"longitude\": 106.6297\n    },\n    \"timestamp\": \"2025-12-09T10:10:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tạo bài tập Vật lý lớp 12 về cơ học lượng tử\",\n    \"intent\": \"EDUCATION\",\n    \"sub_intent\": \"create_exercise\",\n    \"metadata\": {\n      \"grade\": \"12\",\n      \"subject\": \"Vật lý\",\n      \"topic\": \"Cơ học lượng tử\",\n      \"num_exercises\": 3\n    }\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chat"
+					]
+				},
+				"description": "Test Tier 3 - Complex case (Vật lý lớp 12 nâng cao) sẽ dùng LLM Fallback\n\nExpected:\n- ValidationNode: validated=True, grade=12, subject=Vật lý\n- ScopeClassifierNode: tier=3, method=llm_fallback\n- LLMFallbackNode: Generate bằng LLM\n- Response time: 3-10s (có LLM call)"
+			},
+			"response": []
+		},
+		{
+			"name": "Error E01 - Missing Subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Error E01 response', function () {",
+							"    const jsonData = pm.response.json();",
+							"    // Should have error message about missing subject",
+							"    const content = jsonData.data?.content || '';",
+							"    pm.expect(content.toLowerCase()).to.include('môn học');",
+							"});",
+							"",
+							"pm.test('Fast validation error', function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"session_id\": \"{{session_id}}-error-e01\",\n  \"request_id\": \"req-error-e01-{{$timestamp}}\",\n  \"user_context\": {\n    \"user_id\": \"user-test-error\",\n    \"family_id\": \"family-test-error\",\n    \"name\": \"User Error Test\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-error-test\",\n    \"type_box\": \"tablet\",\n    \"device_model\": \"Tammi Tablet\",\n    \"os_type\": \"android\",\n    \"os_version\": \"12\",\n    \"app_version\": \"2.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-12-09T10:20:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tạo bài tập cho lớp 3\",\n    \"intent\": \"EDUCATION\",\n    \"sub_intent\": \"create_exercise\",\n    \"metadata\": {\n      \"grade\": \"6\"\n    }\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chat"
+					]
+				},
+				"description": "Test Error E01 - Missing subject\n\nExpected:\n- ValidationNode: validated=False, error_code=E01\n- Route directly to ResponseBuilderNode\n- Error message: 'Vui lòng cho biết môn học bạn muốn tạo bài tập.'\n- Fast response < 500ms (no generation)"
+			},
+			"response": []
+		},
+		{
+			"name": "Error E03 - Missing Grade",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Error E03 response', function () {",
+							"    const jsonData = pm.response.json();",
+							"    const content = jsonData.data?.content || '';",
+							"    pm.expect(content.toLowerCase()).to.include('lớp');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"session_id\": \"{{session_id}}-error-e03\",\n  \"request_id\": \"req-error-e03-{{$timestamp}}\",\n  \"user_context\": {\n    \"user_id\": \"user-test-error\",\n    \"family_id\": \"family-test-error\",\n    \"name\": \"User Error Test\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-error-test\",\n    \"type_box\": \"tablet\",\n    \"device_model\": \"Tammi Tablet\",\n    \"os_type\": \"android\",\n    \"os_version\": \"12\",\n    \"app_version\": \"2.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-12-09T10:30:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tạo bài tập Toán\",\n    \"intent\": \"EDUCATION\",\n    \"sub_intent\": \"create_exercise\",\n    \"metadata\": {\n      \"subject\": \"Toán\"\n    }\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chat"
+					]
+				},
+				"description": "Test Error E03 - Missing grade\n\nExpected:\n- ValidationNode: validated=False, error_code=E03\n- Error message: 'Vui lòng cho biết lớp học.'\n- Fast response < 500ms"
+			},
+			"response": []
+		},
+		{
+			"name": "Error E04 - Missing Both Grade and Subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Error E04 response', function () {",
+							"    const jsonData = pm.response.json();",
+							"    const content = jsonData.data?.content || '';",
+							"    pm.expect(content.toLowerCase()).to.satisfy(function(str) {",
+							"        return (str.includes('lớp') && str.includes('môn')) || str.includes('thông tin');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"session_id\": \"{{session_id}}-error-e04\",\n  \"request_id\": \"req-error-e04-{{$timestamp}}\",\n  \"user_context\": {\n    \"user_id\": \"user-test-error\",\n    \"family_id\": \"family-test-error\",\n    \"name\": \"User Error Test\"\n  },\n  \"client_context\": {\n    \"box_id\": \"box-error-test\",\n    \"type_box\": \"smart_speaker\",\n    \"device_model\": \"Tammi Gen2\",\n    \"os_type\": \"linux\",\n    \"os_version\": \"5.10\",\n    \"app_version\": \"2.0.0\",\n    \"location\": {\n      \"latitude\": 21.0285,\n      \"longitude\": 105.8542\n    },\n    \"timestamp\": \"2025-12-09T10:35:00Z\"\n  },\n  \"payload\": {\n    \"type\": \"text\",\n    \"content\": \"Tạo bài tập cho tôi\",\n    \"intent\": \"EDUCATION\",\n    \"sub_intent\": \"create_exercise\",\n    \"metadata\": {}\n  },\n  \"history\": [],\n  \"stream\": false\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chat"
+					]
+				},
+				"description": "Test Error E04 - Missing both grade and subject\n\nExpected:\n- ValidationNode: validated=False, error_code=E04\n- Error message: 'Vui lòng cho biết lớp học và môn học.'\n- Fast response < 500ms"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"{\r",
+					"  \"session_id\": \"{{session_id}}-tier1-math\",\r",
+					"  \"request_id\": \"req-tier1-{{$timestamp}}\",\r",
+					"  \"user_context\": {\r",
+					"    \"user_id\": \"user-test-001\",\r",
+					"    \"family_id\": \"family-test-001\",\r",
+					"    \"name\": \"Học sinh A\"\r",
+					"  },\r",
+					"  \"client_context\": {\r",
+					"    \"box_id\": \"box-tier1-test\",\r",
+					"    \"type_box\": \"tablet\",\r",
+					"    \"device_model\": \"Tammi Tablet\",\r",
+					"    \"os_type\": \"android\",\r",
+					"    \"os_version\": \"12\",\r",
+					"    \"app_version\": \"2.0.0\",\r",
+					"    \"location\": {\r",
+					"      \"latitude\": 21.0285,\r",
+					"      \"longitude\": 105.8542\r",
+					"    },\r",
+					"    \"timestamp\": \"2025-12-09T10:00:00Z\" \r",
+					"  },\r",
+					"  \"payload\": {\r",
+					"    \"type\": \"text\",\r",
+					"    \"content\": \"tạo cho tôi 3 câu hỏi toán lớp 3 mức độ khó\",\r",
+					"    // \"content\": \"Giúp tôi giải bài toán này Có ba thùng dầu với dung tích lần lượt là 10 lít, 7 lít và 3 lít. Ban đầu thùng 10 lít đầy dầu, hai thùng còn lại rỗng. Hãy chỉ cách chia dầu thành hai phần bằng nhau (mỗi phần 5 lít) chỉ bằng ba thùng này.\",\r",
+					"    \"intent\": \"EDUCATION\",\r",
+					"    \"sub_intent\": \"create_exercise\"\r",
+					"  },\r",
+					"  \"history\": [],\r",
+					"  \"stream\": false\r",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"{\r",
+					"  \"session_id\": \"{{session_id}}-tier1-math\",\r",
+					"  \"request_id\": \"req-tier1-{{$timestamp}}\",\r",
+					"  \"user_context\": {\r",
+					"    \"user_id\": \"user-test-001\",\r",
+					"    \"family_id\": \"family-test-001\",\r",
+					"    \"name\": \"Học sinh A\"\r",
+					"  },\r",
+					"  \"client_context\": {\r",
+					"    \"box_id\": \"box-tier1-test\",\r",
+					"    \"type_box\": \"tablet\",\r",
+					"    \"device_model\": \"Tammi Tablet\",\r",
+					"    \"os_type\": \"android\",\r",
+					"    \"os_version\": \"12\",\r",
+					"    \"app_version\": \"2.0.0\",\r",
+					"    \"location\": {\r",
+					"      \"latitude\": 21.0285,\r",
+					"      \"longitude\": 105.8542\r",
+					"    },\r",
+					"    \"timestamp\": \"2025-12-09T10:00:00Z\" \r",
+					"  },\r",
+					"  \"payload\": {\r",
+					"    \"type\": \"text\",\r",
+					"    \"content\": \"tạo cho tôi 3 câu hỏi toán lớp 3 mức độ khó\",\r",
+					"    // \"content\": \"Giúp tôi giải bài toán này Có ba thùng dầu với dung tích lần lượt là 10 lít, 7 lít và 3 lít. Ban đầu thùng 10 lít đầy dầu, hai thùng còn lại rỗng. Hãy chỉ cách chia dầu thành hai phần bằng nhau (mỗi phần 5 lít) chỉ bằng ba thùng này.\",\r",
+					"    \"intent\": \"EDUCATION\",\r",
+					"    \"sub_intent\": \"create_exercise\"\r",
+					"  },\r",
+					"  \"history\": [],\r",
+					"  \"stream\": false\r",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5001"
+		},
+		{
+			"key": "session_id",
+			"value": "test-session-{{$randomUUID}}"
+		}
+	]
+}
