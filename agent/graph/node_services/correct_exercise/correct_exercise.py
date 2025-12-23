@@ -31,10 +31,11 @@ class CorrectExerciseNode(NodeBase):
     Correct Exercise Node.
     
     Now uses a subgraph with separate nodes:
-    1. extract_question: Extract user question from state
-    2. retrieve_context: Search Tavily for solution methods
-    3. call_llm: Generate detailed corrections using LLM
-    4. format_output: Format the final response with data artifacts
+    1. extract_input: Handle Text/Image input -> extracted_text
+    2. lookup_history: Check Memory -> ground_truth / reference_context
+    3. retrieve_context: Tavily Search (if needed) -> reference_context
+    4. call_llm: Grade Exercise -> llm_response
+    5. format_output: Format the final response with data artifacts
     """
     
     def __init__(self, llm: BaseChatModel, **kwargs):
@@ -49,10 +50,11 @@ class CorrectExerciseNode(NodeBase):
         Run correct exercise flow using subgraph.
 
         The subgraph handles:
-        1. extract_question: Extract user question from state
-        2. retrieve_context: Search Tavily for solution methods
-        3. call_llm: Generate detailed corrections using LLM
-        4. format_output: Format final response
+        1. extract_input: Handle Text/Image input -> extracted_text
+        2. lookup_history: Check Memory -> ground_truth / reference_context
+        3. retrieve_context: Tavily Search (if needed) -> reference_context
+        4. call_llm: Grade Exercise -> llm_response
+        5. format_output: Format final response
 
         Args:
             state: Current GraphState with user request
